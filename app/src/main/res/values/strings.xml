@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">DirClean</string>
+    <string name="prompt">提示</string>
+    <string name="scanning">正在扫描，请稍等</string>
+    <string name="wechart_file_manager">微信文件管理器</string>
+    <string name="refresh">重新扫描</string>
+    <string name="info">信息</string>
+    <string name="sort">排序</string>
+    <string name="by_sort">排序方式</string>
+    <string name="cleaning">正在清理，请稍后</string>
+    <string name="cancel">取消</string>
+    <string name="warning">警告</string>
+    <string name="delete_message">清除数据只会保留：\"微信下载\" 和 ：\"微信相机的文件\"；其他文件都会删除且不可恢复，请谨操作。</string>
+    <string name="clean">清理</string>
+    <string name="share">分享</string>
+    <string name="delete">删除</string>
+    <string name="delete_success">删除成功</string>
+    <string name="about">关于</string>
+
+    <string-array name="sort_type">
+        <item>时间</item>
+        <item>大小</item>
+    </string-array>
+</resources>
