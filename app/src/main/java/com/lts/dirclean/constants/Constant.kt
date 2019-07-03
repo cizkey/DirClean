@@ -15,5 +15,6 @@ object Constant {
     const val PARENT_NAME: String = "parentName"
     const val DIR_DATABASE_NAME: String = "dir-db"
     const val PATH = "mnt/sdcard/tencent/MicroMsg/"
+    const val REWARD_PATH = PATH + "WeiXin/"
 
 }

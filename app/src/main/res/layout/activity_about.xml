@@ -22,4 +22,121 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
+    <LinearLayout
+            android:orientation="vertical"
+            android:showDividers="middle"
+            android:divider="@drawable/vertical_line"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        <LinearLayout
+                android:id="@+id/ll_project_des"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+            <TextView
+                    android:textColor="@color/taUnselected"
+                    android:gravity="center_vertical"
+                    android:text="@string/project_des"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"/>
+
+            <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/ic_turn_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+            <TextView
+                    android:text="@string/version"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:layout_width="0dp"
+                    android:textColor="@color/taUnselected"
+                    android:gravity="center_vertical"
+                    android:layout_height="match_parent"/>
+
+            <TextView
+                    android:id="@+id/tv_version_name"
+                    android:textSize="14sp"
+                    android:textColor="@color/dateColor"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+            <TextView
+                    android:text="@string/contact_me"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:layout_width="0dp"
+                    android:textColor="@color/taUnselected"
+                    android:gravity="center_vertical"
+                    android:layout_height="match_parent"/>
+
+            <TextView
+                    android:textSize="14sp"
+                    android:text="@string/email"
+                    android:textColor="@color/dateColor"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+                android:id="@+id/ll_reward"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+            <TextView
+                    android:textColor="@color/taUnselected"
+                    android:gravity="center_vertical"
+                    android:text="@string/reward"
+                    android:layout_width="0dp"
+                    android:textSize="16sp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"/>
+
+            <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/ic_turn_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
 </LinearLayout>
