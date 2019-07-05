@@ -1,8 +1,6 @@
 package com.lts.dirclean.data
 
-import android.os.Handler
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+
 
 class FileRepository private constructor(val fileDao: FileDao){
 

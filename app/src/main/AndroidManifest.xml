@@ -17,7 +17,7 @@
             tools:ignore="GoogleAppIndexingWarning">
 
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -25,12 +25,17 @@
             </intent-filter>
         </activity>
 
-
-        <activity android:name=".AboutActivity"
+        <!--关于-->
+        <activity android:name=".ui.AboutActivity"
                   android:configChanges="orientation|keyboardHidden|screenSize"
                   android:windowSoftInputMode="adjustPan|stateHidden">
 
         </activity>
+
+        <!--奔溃日志-->
+        <activity android:name=".ui.CrashListActivity"
+                  android:configChanges="orientation|keyboardHidden|screenSize"
+                  android:windowSoftInputMode="adjustPan|stateHidden"/>
 
         <provider
                 android:name="androidx.core.content.FileProvider"

@@ -1,18 +1,13 @@
-package com.lts.dirclean
+package com.lts.dirclean.ui
 
 import android.Manifest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.lts.dirclean.utils.InjectorUtils
 import com.lts.dirclean.viewmodels.MainViewmodel
 import kotlinx.android.synthetic.main.activity_main.*
-import android.Manifest.permission
-import android.Manifest.permission.WRITE_CALENDAR
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -23,28 +18,25 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkInfo
-import androidx.work.WorkManager
 import com.google.android.material.snackbar.Snackbar
+import com.lts.dirclean.R
 import com.lts.dirclean.adapter.FragmentAdapter
 import com.lts.dirclean.constants.Constant
 import com.lts.dirclean.constants.MessageEvent
+import com.lts.dirclean.crash.CrashHandler
 import com.lts.dirclean.data.DirItem
 import com.lts.dirclean.utils.Setting
-import com.lts.dirclean.workers.FileDatabaseWorker
-import kotlinx.android.synthetic.main.fragment_file_list.*
 import org.greenrobot.eventbus.EventBus
-import java.util.*
+import java.io.IOException
 import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    private val TAG by lazy { MainActivity::class.java.simpleName }
 
-    private lateinit var settings : Setting
-    private var isShowProgress : Boolean = true
+    private lateinit var settings: Setting
+    private var isShowProgress: Boolean = true
 
 
     private val viewmodel: MainViewmodel by viewModels {
@@ -58,8 +50,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setSupportActionBar(toolbar)
 
         settings = Setting.getInstances(this)
-        //默认排序方式 按时间
-        settings.setSoryBy(1)
+
+        CrashHandler.instances.init(this)
         isShowProgress = settings.getFirstLoading()
 
         fab.hide()
@@ -69,7 +61,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu,menu)
+        menuInflater.inflate(R.menu.main_menu, menu)
 
         return true
     }
@@ -82,7 +74,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
         return super.onOptionsItemSelected(item)
     }
-
 
 
     private fun requestPermission() {
@@ -121,7 +112,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         })
 
 
-
     }
 
     private fun subscribleFiles() {
@@ -142,7 +132,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
                 settings.setFirstLoading(false)
 
-            }else if (it.state == WorkInfo.State.RUNNING) {
+            } else if (it.state == WorkInfo.State.RUNNING) {
                 fab.hide()
                 progress.visibility = if (isShowProgress) View.VISIBLE else View.GONE
 
@@ -155,7 +145,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val create = AlertDialog.Builder(this)
             .setTitle(resources.getString(R.string.prompt))
             .setMessage(text)
-            .setPositiveButton(resources.getString(R.string.cancel), DialogInterface.OnClickListener { dialog, which ->
+            .setPositiveButton(resources.getString(R.string.cancel), { dialog, which ->
                 dialog.dismiss()
             })
             .create()
@@ -177,7 +167,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val list = ArrayList<Fragment>()
         if (it != null) {
             for (dirItem in it.iterator()) {
-                val instance = FileListFragment.getInstance(dirItem.aliasName,dirItem.name)
+                val instance = FileListFragment.getInstance(dirItem.aliasName, dirItem.name)
 
                 list.add(instance)
             }
@@ -201,8 +191,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
+        settings.setIsCleaning(true)
+        showDeleteDialog()
 
-       showDeleteDialog()
     }
 
     private fun showDeleteDialog() {
@@ -210,9 +201,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         builder.setTitle(resources.getString(R.string.warning))
         builder.setMessage(resources.getString(R.string.delete_message))
         builder.setPositiveButton(resources.getString(R.string.clean),
-            DialogInterface.OnClickListener { dialog, which -> deleteFiles() })
+            { dialog, which -> deleteFiles() })
         builder.setNegativeButton(resources.getString(R.string.cancel),
-            DialogInterface.OnClickListener { dialog, which -> dialog.dismiss() })
+            { dialog, which -> dialog.dismiss() })
 
         val dialog = builder.create()
         dialog.show()
@@ -228,13 +219,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val sum = it.outputData.getLong(Constant.TOTAL_COUNT, 0)
 
 
-                Snackbar.make(toolbar,"清理了$sum 个文件",Snackbar.LENGTH_LONG).show()
+                Snackbar.make(toolbar, "清理了$sum 个文件", Snackbar.LENGTH_LONG).show()
                 EventBus.getDefault().post(MessageEvent(Constant.UPDATE_UI))
 
             } else if (it.state == WorkInfo.State.RUNNING) {
                 tv_clean_title.setText(resources.getString(R.string.cleaning))
                 progress.visibility = View.VISIBLE
             }
+
+            settings.setIsCleaning(false)
 
         })
     }

@@ -13,7 +13,7 @@ class CleanWorker(
     context: Context, workerParams: WorkerParameters
 ) : CoroutineWorker(context, workerParams) {
 
-    private var sum : Long = 0
+    private var sum: Long = 0
 
     override suspend fun doWork(): Result = coroutineScope {
 
@@ -37,7 +37,9 @@ class CleanWorker(
                 val file = File(item.filePath)
                 file.delete()
 
+
                 fileDao.deleteById(item.id)
+
                 sum += item.fileSize
             }
         }

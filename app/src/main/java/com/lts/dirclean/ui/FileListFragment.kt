@@ -1,4 +1,4 @@
-package com.lts.dirclean
+package com.lts.dirclean.ui
 
 
 import android.os.Bundle
@@ -10,21 +10,19 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.lts.dirclean.R
 import com.lts.dirclean.adapter.OnDeleteClickListenter
 import com.lts.dirclean.adapter.RecyclerAdapter
 import com.lts.dirclean.constants.Constant
 import com.lts.dirclean.constants.MessageEvent
-import com.lts.dirclean.data.FileByTimeSort
 import com.lts.dirclean.data.FileItem
 import com.lts.dirclean.utils.InjectorUtils
-import com.lts.dirclean.utils.Setting
 import com.lts.dirclean.viewmodels.FileListViewModel
 import kotlinx.android.synthetic.main.fragment_file_list.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.io.File
-import java.util.*
 
 
 class FileListFragment : Fragment(), OnDeleteClickListenter {
@@ -99,7 +97,10 @@ class FileListFragment : Fragment(), OnDeleteClickListenter {
     }
 
     private fun subscribleFiles() {
-        viewModel.getFiles(parentName,startDate,endDate).observe(viewLifecycleOwner, Observer {
+        val liveData = viewModel.getFiles(requireContext(), parentName, startDate, endDate)
+        if (liveData == null) return
+
+        liveData.observe(viewLifecycleOwner, Observer {
 
             adapter = RecyclerAdapter(requireContext(), it)
             val manager = GridLayoutManager(requireContext(), 3)

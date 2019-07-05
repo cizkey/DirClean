@@ -10,5 +10,6 @@
 
 
     <external-path name="external" path="tencent" />
+    <external-files-path name="log" path="log" />
 
 </paths>

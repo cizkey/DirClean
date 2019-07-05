@@ -24,6 +24,11 @@
     <string name="project_des">项目介绍</string>
     <string name="reward">打赏</string>
     <string name="save_reward">保存赞赏码</string>
+    <string name="share_app">分享应用</string>
+    <string name="crash">Crash</string>
+    <string name="crash_empty">是不是很牛逼，还没Crash过</string>
+    <string name="open">查看</string>
+    <string name="send_develop">邮件</string>
 
     <string-array name="sort_type">
         <item>时间</item>

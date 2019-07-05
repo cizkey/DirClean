@@ -25,6 +25,7 @@
     <LinearLayout
             android:orientation="vertical"
             android:showDividers="middle"
+            android:background="@android:color/white"
             android:divider="@drawable/vertical_line"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -58,6 +59,7 @@
 
 
         <LinearLayout
+                android:id="@+id/ll_version"
                 android:layout_marginRight="16dp"
                 android:layout_marginLeft="16dp"
                 android:orientation="horizontal"
@@ -76,14 +78,23 @@
             <TextView
                     android:id="@+id/tv_version_name"
                     android:textSize="14sp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:textColor="@color/dateColor"
                     android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/ic_turn_right"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
         <LinearLayout
+                android:id="@+id/ll_contact"
                 android:layout_marginRight="16dp"
                 android:layout_marginLeft="16dp"
                 android:orientation="horizontal"
@@ -101,13 +112,48 @@
 
             <TextView
                     android:textSize="14sp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
                     android:text="@string/email"
                     android:textColor="@color/dateColor"
                     android:gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
+            <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/ic_turn_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
         </LinearLayout>
+
+
+        <LinearLayout
+                android:id="@+id/ll_throw"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+            <TextView
+                    android:textColor="@color/taUnselected"
+                    android:gravity="center_vertical"
+                    android:text="@string/crash"
+                    android:layout_width="0dp"
+                    android:textSize="16sp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"/>
+
+            <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/ic_turn_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
 
 
         <LinearLayout

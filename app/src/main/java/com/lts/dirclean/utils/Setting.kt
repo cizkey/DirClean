@@ -23,22 +23,6 @@ class Setting private constructor(private val sharedPreferences: SharedPreferenc
 
 
     /**
-     * 设置排序方式
-     * @param type 1: 按时间排序 2: 按文件大小排序
-     */
-    fun setSoryBy(type : Int){
-        sharedPreferences.edit().putInt(Constant.SORT_BY,type).apply()
-    }
-
-    /**
-     * 获取设置的排序方式
-     * @return 1 : 按时间排序 2 按文件大小排序
-     */
-    fun getBySort() : Int {
-        return sharedPreferences.getInt(Constant.SORT_BY,0)
-    }
-
-    /**
      * 设置某哥文件的最后修改时间
      * @param dirName 文件名
      * @param lastModified 最后修改时间
@@ -62,5 +46,13 @@ class Setting private constructor(private val sharedPreferences: SharedPreferenc
 
     fun getFirstLoading() : Boolean {
         return sharedPreferences.getBoolean(Constant.IS_FIRST_LOADING,true)
+    }
+
+    fun setIsCleaning(isClean : Boolean) {
+        sharedPreferences.edit().putBoolean(Constant.CLEANING,isClean).apply()
+    }
+
+    fun getCleaned() : Boolean {
+        return sharedPreferences.getBoolean(Constant.CLEANING,false)
     }
 }

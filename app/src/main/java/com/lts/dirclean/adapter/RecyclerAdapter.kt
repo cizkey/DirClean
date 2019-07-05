@@ -99,15 +99,9 @@ class RecyclerAdapter(
     private fun initSort() {
         setting = Setting.getInstances(context)
 
-        if (setting.getBySort() == 1) {
-            val fileByTimeSort = FileByTimeSort()
-            Collections.sort(data, fileByTimeSort)
+        val fileByTimeSort = FileByTimeSort()
+        Collections.sort(data, fileByTimeSort)
 
-        } else {
-
-            val fileBySize = FileBySizeSort()
-            Collections.sort(data, fileBySize)
-        }
 
     }
 
@@ -226,7 +220,7 @@ class RecyclerAdapter(
             holder.tvName.setText(fileItem.fileName)
             holder.tvDate.setText(formatDate(Date(fileItem.lastModified)))
 
-            holder.imageView.setOnClickListener(View.OnClickListener {
+            holder.imageView.setOnClickListener({
 
                 val mimeType = MimeUtils.guessMimeTypeFromExtension(fileItem.fileType)
 
@@ -337,11 +331,11 @@ class RecyclerHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val cardView: CardView
 
     init {
-        imageView = itemView.findViewById(com.lts.dirclean.R.id.image)
-        ivPlayer = itemView.findViewById(com.lts.dirclean.R.id.iv_player)
-        tvDuration = itemView.findViewById(com.lts.dirclean.R.id.tv_duration)
-        tvSize = itemView.findViewById(com.lts.dirclean.R.id.tv_size)
-        tvName = itemView.findViewById(com.lts.dirclean.R.id.tv_name)
+        imageView = itemView.findViewById(R.id.image)
+        ivPlayer = itemView.findViewById(R.id.iv_player)
+        tvDuration = itemView.findViewById(R.id.tv_duration)
+        tvSize = itemView.findViewById(R.id.tv_size)
+        tvName = itemView.findViewById(R.id.tv_name)
         tvDate = itemView.findViewById(R.id.tv_date)
         cardView = itemView.findViewById(R.id.cardView)
     }

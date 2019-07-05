@@ -119,3 +119,7 @@ MicroMsg
 * [Glide](https://github.com/bumptech/glide)
 * [Android-Debug-Database](https://github.com/amitshekhariitbhu/Android-Debug-Database)
 
+## 待完成功能
+
+* 首页TAB支持自定义显示及排序，清理后如果改目录下没有文件了要隐藏起来
+* 目前查询数据库会把改文件下的所有文件查询出来，之后改成分页查询
